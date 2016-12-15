@@ -10,13 +10,13 @@ public class MyTest3 {
         Process pr = rt.exec("jps -l");
         BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
         String line=null;
-        boolean running  = false;
+        int running  = 0;
         while((line=input.readLine()) != null) {
             if(line.contains(name)) {
-                running = true;
+                running++;
             }
         }
-        if(running) {
+        if(running>1) {
             return true;
         }else {
             return  false;
@@ -24,7 +24,7 @@ public class MyTest3 {
     }
 
     public static void main(String arg[]) throws IOException {
-        //For Class NAme we can use System.getProperty("sun.java.command")
+        //For Class Name we can use System.getProperty("sun.java.command")
         if(!isRunning("MyTest3")){
             for (int i = 0; i < 1000; i++) {
                 System.out.println("Date:" + new Date() + ":" + i);
